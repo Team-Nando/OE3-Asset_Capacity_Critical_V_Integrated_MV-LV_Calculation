@@ -1,14 +1,12 @@
-# Assessment of Integrated HV-LV OE Calculations to Orchestrate DERs - OE Algorithm 3: Asset Capacity & Critical Voltage 
-This repository is part of the project [Assessing the Benefits of Using Operating Envelopes to Orchestrate DERs Across Australia](https://electrical.eng.unimelb.edu.au/power-energy/projects/assessing-the-benefits-of-OEs-across-Australia) funded by CSIRO. This project provided key metrics and recommendations for distribution companies (known as Distribution Network Service Providers [DNSPs] in Australia) and AEMO (the Australian system operator) to assist them in their decision-making process when defining the most suitable Operating Envelope (OE) implementations in a given distribution area.
+# Assessment of Integrated MV-LV OE Calculations to Orchestrate DERs - OE Algorithm 3: Asset Capacity & Critical Voltage 
+This repository is part of the project [Accelerating the Implementation of Operating Envelopes Across Australia](https://electrical.eng.unimelb.edu.au/power-energy/projects/accelerating-the-implementation-of-operating-envelopes-across-australia) funded by CSIRO. This project provided key metrics, recommendations, and guidance for distribution companies (known as Distribution Network Service Providers [DNSPs] in Australia) and AEMO (the Australian system operator) to assist them in improving and, hence, accelerating the use of Operating Envelopes (OEs) across Australia.
 
-In this repository, we use interactive code via Jupyter Notebook and Python as well as a realistic residential low voltage (LV) network to demonstrate the process and necessary calculations for the *Asset Capacity & Critical Voltage OE Algorithm* produced by The University of Melbourne. This demonstration is useful for different stakeholders (e.g., DNSPs, AEMO, CSIRO, regulators, consultancy companies, technology providers) as it can help them familiarise with the corresponding algorithm and the required inputs as well as the pros and cons.
+In this repository, we use interactive code via Jupyter Notebook and Python as well as a [realistic integrated medium voltage and low voltage (MV-LV) network](https://github.com/Team-Nando/MV-LV-Networks) to demonstrate the process and necessary calculations for the *Asset Capacity & Critical Voltage OE Algorithm with Integrated MV-LV Calculation* produced by The University of Melbourne. This demonstration is useful for different stakeholders (e.g., DNSPs, AEMO, CSIRO, regulators, consultancy companies, technology providers) as it can help them familiarise with the corresponding algorithm and the required inputs as well as the pros and cons.
 
-## Asset Capacity & Critical Voltage OE
-The Asset Capacity & Critical Voltage OE is more advanced than the Asset Capacity OE as both voltage and thermal issues are considered instead of only thermal issues. At a given moment in time, it considers the spare thermal capacity of the distribution transformer (i.e., thermal capacity minus net demand of all the customers) and splits it among active customers. Then, using the spare capacity allocated to the critical customer (i.e., the customer located furthest from the distribution transformer), it estimates the voltage at the critical customer via a sensitivity curve that relates the net demand P to the voltage magnitude of the critical customer.
-- Required Monitoring: At the secondary of the transformer (aggregated P and aggregated Q per phase), and at the critical customer (voltage magnitude and net demand P).
-- Required Electrical Models: None.
-
-For simplicity, the case study used to demonstrate the OE algorithm corresponds to a low voltage (LV) network without modelling the upstream high voltage (HV) network. Although some adaptations have been made to ensure realistic voltage fluctuations at the distribution transformer of the LV network, the results are not exactly the same as those presented in the Final Report of the project (which used an integrated HV-LV network model). Nevertheless, the behaviour of the OE algorithm and the qualitative nature of the results remain the same.
+## Asset Capacity & Critical Voltage OE with Integrated MV-LV Calculation
+The Asset Capacity & Critical Voltage OE with Integrated MV-LV Calculations is an intermediate approach - it is more advanced than the Asset Capacity OE as both voltage and thermal aspects are considered, but less advanced than the Ideal OE - that is still relatively simple to be implemented since it does not need network models and only an extra monitoring (e.g., smart meter, temporary network meter) at the critical customer when compared to the Asset Capcity OE. In this OE approach, thermal issues are solved by estimating the spare capacity of MV and LV networks, while voltages issues are solved by estimating the voltage (using simple P-V sensitivity curves) at the critical customer of each LV network. </span>
+- Monitoring: At MV and LV head of feeders (P, Q, and V, all per phase), and at the critical customer of each LV network (net demand P, and voltage magnitude V).
+- Electrical models: None.
 
 ## Pre-Requisites
 - Python (Anaconda) and Jupyter Notebook (comes with Anaconda). For download links and more info: https://www.anaconda.com/download. Note that you must install the Anaconda that is compatible with your operating system (e.g., Windows, Mac). Also note that this repository is meant to be used by individuals (who can get free access to Anaconda).
@@ -34,6 +32,14 @@ Arthur Gonçalves Givisiez (a.goncalvesgivisiez@unimelb.edu.au)
 
 Nando Ochoa (luis.ochoa@unimelb.edu.au ; https://sites.google.com/view/luisfochoa)
 
+## Acknowledgements
+We acknowledge AusNet Services for providing the data listed below, which was essential to create this repository.
+- Anonymised historical active power demand of some customers (smart meter data)
+- The data (i.e., topology, impedances, distribution transformers) of one of their MV feeders (indirectly used by this repository)
+
+More details of this data can be found in the [Team Nando GitHub repository for Australian MV-LV Networks](https://github.com/Team-Nando/MV-LV-Networks), files named "Network_4_Urban_CRE21" and "Profiles".
+
+We also acknowledge the Australian Bureau of Meteorology for providing the solar radiation data.
+
 ## Licenses
 Since this repository uses dss_python which is based on OpenDSS, both licenses have been included. This repository uses the BSD 3-Clause "New" or "Revised" license. Check all corresponding files (`LICENSE-OpenDSS`, `LICENSE-dss_python`, `LICENSE`).
-
